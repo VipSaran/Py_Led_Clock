@@ -1,0 +1,31 @@
+### BEGIN INIT INFO
+# Provides: led_clock
+# Required-Start: $remote_fs $syslog
+# Required-Stop: $remote_fs $syslog
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: LED clock
+# Description: A simple clock & temperature application in Python for a 7-segment LED backpack
+### END INIT INFO
+
+
+#!/bin/sh
+
+APP_HOME=/home/pi/python/py_led_clock
+
+case "$1" in
+    start)
+        echo "Starting LED"
+        $APP_HOME/clock.py 2>&1 &
+    ;;
+    stop)
+        echo "Stopping LED"
+        LED_PID=`ps auxwww | grep clock.py | grep -v grep | head -1 | awk '{print $2}'`
+        kill -USR1 $LED_PID
+    ;;
+    *)
+        echo "Usage: /etc/init.d/led_clock {start|stop}"
+        exit 1
+    ;;
+esac
+exit 0

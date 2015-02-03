@@ -77,6 +77,7 @@ updated_s = -1
 while(True):
     now = datetime.datetime.now()
     logging.debug('now: %s', now.strftime("%s"))
+
     hour = now.hour
     minute = now.minute
     second = now.second
@@ -86,6 +87,7 @@ while(True):
     if (time.time() > brightness_checked_at + 600):
         brightness_checked_at = time.time()
         logging.debug('brightness_checked_at: %s', brightness_checked_at)
+
         daytime = is_daytime(now)
 
     if (daytime):
@@ -101,15 +103,19 @@ while(True):
         try:
             URL = 'https://api.forecast.io/forecast/' + APIKey + '/' + LATITUDE + \
                 ',' + LONGITUDE + '?exclude=minutely,hourly,daily,flags,alerts'
-            state = requests.get(URL).json()
-            logging.debug('state: %s', state)
-            temp_city = round(float(state["currently"]["temperature"]), 1)
+            forecast = requests.get(URL).json()
+            logging.debug('forecast: %s', forecast)
+            
+            temp_city = round(float(forecast["currently"]["temperature"]), 1)
             if (not FAHRENHEIT):
                 temp_city = round((temp_city - 32) * 5 / 9, 1)
             logging.debug('Living room temperature: %s %s' %
                           (temp_city, 'F' if FAHRENHEIT else 'C'))
+
+            # if failed requests are counted for daily limit, move this to be updated before the request is made
             updated_s = int(now.strftime("%s"))
             logging.debug('updated_s: %s', updated_s)
+            
         except Exception, e:
             logging.error('Exception (temp): %s', e)
 
@@ -125,12 +131,16 @@ while(True):
         negative_temp = temp_city < 0
         m_floor = math.floor(abs(temp_city))
         logging.debug('m_floor: %s', m_floor)
+
         hour_tens = int(m_floor / 10)
         logging.debug('hour_tens: %s', hour_tens)
+
         hour_ones = int(m_floor % 10)
         logging.debug('hour_ones: %s', hour_ones)
+
         min_tens = int("%.0f" % ((abs(temp_city) - m_floor) * 10))
         logging.debug('min_tens: %s', min_tens)
+
         if (negative_temp):
             min_ones = 0xE
         else:

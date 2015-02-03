@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import os
 import logging
 import math
 import requests
@@ -12,10 +13,11 @@ from astral import Astral
 
 segment = SevenSegment(address=0x77)
 
+APP_HOME = os.path.dirname(os.path.realpath(__file__))
 FORMAT = '%(asctime)-15s %(levelname)s:%(message)s'
 logging.basicConfig(
-    format=FORMAT, filename='log/clock.err', level=logging.ERROR)
-    # format=FORMAT, filename='log/clock.log', level=logging.DEBUG)
+    format=FORMAT, filename=APP_HOME + '/log/clock.err', level=logging.ERROR)
+    # format=FORMAT, filename=APP_HOME + '/log/clock.log', level=logging.DEBUG)
 
 
 def receive_signal(signal, frame):

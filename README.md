@@ -4,6 +4,8 @@ A simple clock & temperature application in Python for a [7-segment LED backpack
 
 The app relies on LED [libraries from Adafruit](https://github.com/adafruit/Adafruit-Raspberry-Pi-Python-Code), but uses own, slightly modified/extended files.
 
+[![ScreenShot](https://raw.github.com/VipSaran/Py_Led_Clock/master/screenshot.png)](http://youtu.be/RUJoklPggZI)
+
 
 ## Initial Configuration
 

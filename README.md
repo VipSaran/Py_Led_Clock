@@ -1,3 +1,22 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Py LED Clock](#py-led-clock)
+  - [Initial Configuration](#initial-configuration)
+    - [I2C Address](#i2c-address)
+    - [Daylight (sunrise/sunset) Zone](#daylight-sunrisesunset-zone)
+    - [Weather Information](#weather-information)
+    - [Script Location](#script-location)
+  - [Installation](#installation)
+  - [Setting up LED clock as service](#setting-up-led-clock-as-service)
+  - [Installing dependencies](#installing-dependencies)
+  - [Running](#running)
+  - [Notes](#notes)
+  - [License](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Py LED Clock
 
 A simple clock & temperature application in Python for a [7-segment LED backpack](https://learn.adafruit.com/adafruit-led-backpack/0-dot-56-seven-segment-backpack) connected to Raspberry Pi.

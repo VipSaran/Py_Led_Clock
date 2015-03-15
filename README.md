@@ -8,8 +8,12 @@
     - [Daylight (sunrise/sunset) Zone](#daylight-sunrisesunset-zone)
     - [Weather Information](#weather-information)
     - [Script Location](#script-location)
+      - [Target init system: SysVinit](#target-init-system-sysvinit)
+      - [Target init system: Systemd](#target-init-system-systemd)
   - [Installation](#installation)
   - [Setting up LED clock as service](#setting-up-led-clock-as-service)
+      - [Target init system: SysVinit](#target-init-system-sysvinit-1)
+      - [Target init system: Systemd](#target-init-system-systemd-1)
   - [Installing dependencies](#installing-dependencies)
   - [Running](#running)
   - [Notes](#notes)
@@ -45,17 +49,31 @@ Temperature will be displayed in degrees Celsius unless `FAHRENHEIT` is set to `
 
 ### Script Location
 
+#### Target init system: SysVinit
+
 In `led_clock` file (the one used for service) change the `APP_HOME` value to correspond to the directory you have cloned this project into and where `clock.py` is run from.
+
+#### Target init system: Systemd
+
+In `led_clock.service` file (the one used for service) change the path to correspond to the directory you have cloned this project into and where `clock.py` is run from.
 
 ## Installation
 
 ## Setting up LED clock as service
 
-Even though the program can be run directly (from command line), it is of better use if it automatically boots up with the system. To do so, simply install it as a service:
+Even though the program can be run directly (from command line), it is of better use if it automatically boots up with the system. To do so, simply install it as a service.
+
+#### Target init system: SysVinit
 
     sudo cp led_clock /etc/init.d/
     sudo chmod +x /etc/init.d/led_clock
     sudo update-rc.d led_clock defaults
+
+#### Target init system: Systemd
+
+    sudo cp led_clock.service /lib/systemd/system/
+    sudo chmod +x /lib/systemd/system/led_clock.service
+    sudo systemctl enable led_clock 
 
 ## Installing dependencies
 

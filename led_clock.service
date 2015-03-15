@@ -1,0 +1,10 @@
+[Unit]
+Description=A simple clock & temperature application in Python for a 7-segment LED backpack
+After=remote-fs.target
+
+[Service]
+ExecStart=/usr/bin/python /home/pi/python/py_led_clock/clock.py 2>&1 &                                   
+ExecStop=/bin/bash -c 'echo "Stopping LED"; /bin/bash /home/pi/python/py_led_clock/stop.sh'
+
+[Install]
+WantedBy=default.target
